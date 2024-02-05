@@ -1,14 +1,7 @@
 <resources>
     <string name="app_name">News-App</string>
-    <string name="title_activity_web_view">WebViewActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
     <string name="old_to_new">Oldest news</string>
     <string name="new_to_old">Latest news</string>
-
     <string name="internet_connection">No internet connection available. Please try later!</string>
-
+    <string name="title_activity_splash">SplashActivity</string>
 </resources>

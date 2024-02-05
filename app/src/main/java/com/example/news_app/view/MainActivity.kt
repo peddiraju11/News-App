@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             // Create channel to show notifications.
             val channelId = getString(R.string.app_name)
-            val channelName = getString(R.string.title_activity_web_view)
+            val channelName = getString(R.string.app_name)
             val notificationManager = getSystemService(NotificationManager::class.java)
             notificationManager?.createNotificationChannel(
                 NotificationChannel(
@@ -149,14 +149,14 @@ class MainActivity : AppCompatActivity() {
         val connectivityManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val network = connectivityManager.activeNetwork
             val capabilities =
                 connectivityManager.getNetworkCapabilities(network)
-            return capabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
+            capabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
         } else {
             val activeNetworkInfo = connectivityManager.activeNetworkInfo
-            return activeNetworkInfo?.isConnected == true
+            activeNetworkInfo?.isConnected == true
         }
     }
 
