@@ -1,12 +1,13 @@
-package com.example.news_app
+package com.example.news_app.model
 
-data class Article(
+// Data class representing a news article
+data class NewsArticle(
     val author: String,
     val content: String,
     val description: String,
     val publishedAt: String,
     val source: Source,
     val title: String,
-    val url: String,
+    var url: String,
     val urlToImage: String
 )
