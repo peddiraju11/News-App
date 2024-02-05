@@ -36,14 +36,10 @@ class MainActivity : AppCompatActivity() {
     ) { isGranted: Boolean ->
         if (isGranted) {
             // Permission granted, show a toast
-            Toast.makeText(this, "Notifications permission granted", Toast.LENGTH_SHORT).show()
+            displayToastMessage(getString(R.string.permissions_granted))
         } else {
             // Permission not granted, show a toast with a message
-            Toast.makeText(
-                this,
-                "FCM can't post notifications without POST_NOTIFICATIONS permission",
-                Toast.LENGTH_LONG,
-            ).show()
+            displayToastMessage(getString(R.string.permissions_not_granted))
         }
     }
 
@@ -54,6 +50,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Check internet connection on activity creation
         checkInternetConnection()
     }
 
@@ -91,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    //Check whether Internet connection is available or not
+    // Check whether Internet connection is available or not
     private fun checkInternetConnection() {
         if (isNetworkAvailable()) {
             // Internet connection is available
@@ -130,14 +127,17 @@ class MainActivity : AppCompatActivity() {
                 viewModel.sortNewsByDate()
 
                 // Toggle the button text based on sorting order
-                if (viewModel.isAscendingOrder)
+                if (viewModel.isAscendingOrder) {
+                    displayToastMessage(getString(R.string.toast_mesg_latest))
                     binding.sortButton.text = this.getString(R.string.new_to_old)
-                else
+                } else {
+                    displayToastMessage(getString(R.string.toast_mesg_old))
                     binding.sortButton.text = this.getString(R.string.old_to_new)
+                }
             }
 
             // Execute ViewModel to fetch news data
-            viewModel.fetchNews("https://candidate-test-data-moengage.s3.amazonaws.com/Android/news-api-feed/staticResponse.json")
+            viewModel.fetchNews(BASE_URL)
 
         } else {
             // No internet connection
@@ -145,6 +145,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Function to check if the network is available
     private fun isNetworkAvailable(): Boolean {
         val connectivityManager =
             getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -160,12 +161,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Display a message when there is no internet connection
     private fun showMessage() {
-        // Display the message in a TextView or any other UI component
         with(binding) {
             noInterNetText.visibility = View.VISIBLE
             recyclerView.visibility = View.GONE
             progressBar.visibility = View.GONE
         }
+    }
+
+    // Display a toast message
+    private fun displayToastMessage(message: String) {
+        Toast.makeText(
+            this,
+            message,
+            Toast.LENGTH_SHORT,
+        ).show()
+    }
+
+    companion object {
+        // Base URL for fetching news data
+        const val BASE_URL =
+            "https://candidate-test-data-moengage.s3.amazonaws.com/Android/news-api-feed/staticResponse.json"
     }
 }

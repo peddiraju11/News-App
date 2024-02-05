@@ -1,7 +1,11 @@
 <resources>
-    <string name="app_name">News-App</string>
+    <string name="app_name">News App</string>
     <string name="old_to_new">Oldest news</string>
     <string name="new_to_old">Latest news</string>
     <string name="internet_connection">No internet connection available. Please try later!</string>
     <string name="title_activity_splash">SplashActivity</string>
+    <string name="permissions_granted">Notifications permission granted</string>
+    <string name="permissions_not_granted">FCM can\'t post notifications without POST_NOTIFICATIONS permission</string>
+    <string name="toast_mesg_latest">Fetching latest news..</string>
+    <string name="toast_mesg_old">Fetching old news..</string>
 </resources>
